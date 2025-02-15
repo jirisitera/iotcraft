@@ -21,7 +21,7 @@
     "minecraft": ">=${minecraft_version}",
     "fabricloader": ">=${loader_version}",
     "fabric-api": ">=${fabric_version}",
-    "owo": ">=${owo_version}",
+    "owo-lib": ">=${owo_version}",
     "modmenu": ">=${modmenu_version}"
   }
 }

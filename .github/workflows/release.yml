@@ -21,3 +21,4 @@ jobs:
           modrinth-id: Yb0wYJtD
           modrinth-token: ${{secrets.MODRINTH_TOKEN}}
           files: build/libs/iotcraft.jar
+          name: ""
