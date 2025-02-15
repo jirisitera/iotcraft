@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "iotcraft",
+  "version": "${version}",
+  "name": "IoTcraft",
+  "description": "A tool for connecting worlds.",
+  "authors": [
+    "japicraft"
+  ],
+  "contact": {
+    "source": "https://github.com/jirisitera/IoTcraft"
+  },
+  "license": "MIT",
+  "icon": "assets/iotcraft/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": ["japi.iotcraft.client.IotcraftClient"],
+    "main": ["japi.iotcraft.Iotcraft"]
+  },
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
