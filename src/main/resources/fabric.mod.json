@@ -24,6 +24,6 @@
     "fabricloader": ">=${loader_version}",
     "fabric-api": ">=${fabric_version}",
     "modmenu": ">=${modmenu_version}",
-    "cloth-config2": ">=${cloth_config_version}"
+    "cloth-config": ">=${cloth_config_version}"
   }
 }
