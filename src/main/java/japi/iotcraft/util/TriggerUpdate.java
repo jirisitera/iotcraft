@@ -2,7 +2,7 @@ package japi.iotcraft.util;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
-import japi.iotcraft.client.IotcraftClient;
+import japi.iotcraft.Iotcraft;
 
 public class TriggerUpdate {
 
@@ -44,6 +44,6 @@ public class TriggerUpdate {
   }
 
   private void sendMqttMessage(JsonObject payloadObj) {
-    IotcraftClient.publishMessage(topic, IotcraftClient.gson.toJson(payloadObj));
+    Iotcraft.publishMessage(topic, Iotcraft.GSON.toJson(payloadObj));
   }
 }

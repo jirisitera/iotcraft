@@ -3,25 +3,27 @@
   "id": "iotcraft",
   "version": "${version}",
   "name": "IoTcraft",
-  "description": "Connecting the virtual world with the physical",
+  "description": "Connecting the virtual world with the physical.",
   "authors": [
     "japicraft"
   ],
   "contact": {
-    "source": "https://github.com/jirisitera/iotcraft"
+    "homepage": "https://github.com/jirisitera/iotcraft",
+    "sources": "https://github.com/jirisitera/iotcraft",
+    "issues": "https://github.com/jirisitera/iotcraft/issues"
   },
   "license": "MIT",
   "icon": "assets/iotcraft/icon.png",
-  "environment": "*",
+  "environment": "client",
   "entrypoints": {
-    "client": ["japi.iotcraft.client.IotcraftClient"],
-    "main": ["japi.iotcraft.Iotcraft"]
+    "client": ["japi.iotcraft.Iotcraft"],
+    "modmenu": ["japi.iotcraft.config.ModMenuIntegration"]
   },
   "depends": {
     "minecraft": ">=${minecraft_version}",
     "fabricloader": ">=${loader_version}",
     "fabric-api": ">=${fabric_version}",
-    "owo-lib": ">=${owo_version}",
-    "modmenu": ">=${modmenu_version}"
+    "modmenu": ">=${modmenu_version}",
+    "cloth-config2": ">=${cloth_config_version}"
   }
 }

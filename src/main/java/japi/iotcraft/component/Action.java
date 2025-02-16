@@ -5,7 +5,6 @@ import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
 import com.hivemq.client.mqtt.mqtt3.message.publish.Mqtt3Publish;
 import japi.iotcraft.Iotcraft;
-import japi.iotcraft.client.IotcraftClient;
 import net.minecraft.client.MinecraftClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,11 +21,11 @@ public final class Action {
     var errorObj = new JsonObject();
     errorObj.add("topic", new JsonPrimitive(topic));
     errorObj.add("error", new JsonPrimitive(errorMessage));
-    IotcraftClient.publishMessage(Iotcraft.CONFIG.mainTopic() + "/error" + topic, IotcraftClient.gson.toJson(errorObj));
+    Iotcraft.publishMessage(Iotcraft.getConfig().mqtt.mainTopic + "/error" + topic, Iotcraft.GSON.toJson(errorObj));
   }
 
   public static void subscribeToChat() {
-    IotcraftClient.subscribeTopic(Iotcraft.CONFIG.mainTopic() + "/action/chat", (Mqtt3Publish publish) -> {
+    Iotcraft.subscribeTopic(Iotcraft.getConfig().mqtt.mainTopic + "/action/chat", (Mqtt3Publish publish) -> {
 
       var message = new String(publish.getPayloadAsBytes(), StandardCharsets.UTF_8);
       var jsonObject = JsonParser.parseString(message).getAsJsonObject();
@@ -39,10 +38,10 @@ public final class Action {
 
         if (isCommand) {
           //  Send a text as a command through the player without leading slash, similar to command blocks.
-          IotcraftClient.getPlayer().networkHandler.sendCommand(text);
+          Iotcraft.getPlayer().networkHandler.sendCommand(text);
         } else {
           //  Send a text as a chat message through the player.
-          IotcraftClient.getPlayer().networkHandler.sendChatMessage(text);
+          Iotcraft.getPlayer().networkHandler.sendChatMessage(text);
         }
       } else {
         var errorMessage = "Keys 'message' and 'isCommand' required";
@@ -53,7 +52,7 @@ public final class Action {
   }
 
   public static void subscribeToOptions() {
-    IotcraftClient.subscribeTopic(Iotcraft.CONFIG.mainTopic() + "/action/option/fov", (Mqtt3Publish publish) -> {
+    Iotcraft.subscribeTopic(Iotcraft.getConfig().mqtt.mainTopic + "/action/option/fov", (Mqtt3Publish publish) -> {
 
       var message = new String(publish.getPayloadAsBytes(), StandardCharsets.UTF_8);
 
@@ -69,7 +68,7 @@ public final class Action {
         sendErrorMessage("/action/option/fov", errorMessage);
       }
     });
-    IotcraftClient.subscribeTopic(Iotcraft.CONFIG.mainTopic() + "/action/option/brightness", (Mqtt3Publish publish) -> {
+    Iotcraft.subscribeTopic(Iotcraft.getConfig().mqtt.mainTopic + "/action/option/brightness", (Mqtt3Publish publish) -> {
 
       var message = new String(publish.getPayloadAsBytes(), StandardCharsets.UTF_8);
 

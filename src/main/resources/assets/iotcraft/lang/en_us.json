@@ -1,0 +1,9 @@
+{
+  "text.autoconfig.iotcraft.title": "IoTcraft",
+  "text.autoconfig.iotcraft.option.mqtt.broker": "MQTT Broker URL",
+  "text.autoconfig.iotcraft.option.mqtt.broker.@Tooltip": "The URL of the MQTT broker to connect to. Must be without the port at the end.",
+  "text.autoconfig.iotcraft.option.mqtt.port": "MQTT Broker Port",
+  "text.autoconfig.iotcraft.option.mqtt.port.@Tooltip": "The port of the MQTT broker to connect to. A broker can support multiple ports, in which case it doesn't matter which one you use.",
+  "text.autoconfig.iotcraft.option.mqtt.mainTopic": "Main MQTT Topic",
+  "text.autoconfig.iotcraft.option.mqtt.mainTopic.@Tooltip": "The topic under which the mod will create its subtopics. Can be blank for no main topic."
+}
