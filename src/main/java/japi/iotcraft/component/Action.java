@@ -5,6 +5,7 @@ import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
 import com.hivemq.client.mqtt.mqtt3.message.publish.Mqtt3Publish;
 import japi.iotcraft.Iotcraft;
+import japi.iotcraft.MqttManager;
 import net.minecraft.client.MinecraftClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,11 +22,11 @@ public final class Action {
     var errorObj = new JsonObject();
     errorObj.add("topic", new JsonPrimitive(topic));
     errorObj.add("error", new JsonPrimitive(errorMessage));
-    Iotcraft.publishMessage(Iotcraft.getConfig().mqtt.mainTopic + "/error" + topic, Iotcraft.GSON.toJson(errorObj));
+    MqttManager.publishMessage(Iotcraft.getConfig().mqtt.mainTopic + "/error" + topic, Iotcraft.GSON.toJson(errorObj));
   }
 
   public static void subscribeToChat() {
-    Iotcraft.subscribeTopic(Iotcraft.getConfig().mqtt.mainTopic + "/action/chat", (Mqtt3Publish publish) -> {
+    MqttManager.subscribeTopic(Iotcraft.getConfig().mqtt.mainTopic + "/action/chat", (Mqtt3Publish publish) -> {
 
       var message = new String(publish.getPayloadAsBytes(), StandardCharsets.UTF_8);
       var jsonObject = JsonParser.parseString(message).getAsJsonObject();
@@ -52,7 +53,7 @@ public final class Action {
   }
 
   public static void subscribeToOptions() {
-    Iotcraft.subscribeTopic(Iotcraft.getConfig().mqtt.mainTopic + "/action/option/fov", (Mqtt3Publish publish) -> {
+    MqttManager.subscribeTopic(Iotcraft.getConfig().mqtt.mainTopic + "/action/option/fov", (Mqtt3Publish publish) -> {
 
       var message = new String(publish.getPayloadAsBytes(), StandardCharsets.UTF_8);
 
@@ -68,7 +69,7 @@ public final class Action {
         sendErrorMessage("/action/option/fov", errorMessage);
       }
     });
-    Iotcraft.subscribeTopic(Iotcraft.getConfig().mqtt.mainTopic + "/action/option/brightness", (Mqtt3Publish publish) -> {
+    MqttManager.subscribeTopic(Iotcraft.getConfig().mqtt.mainTopic + "/action/option/brightness", (Mqtt3Publish publish) -> {
 
       var message = new String(publish.getPayloadAsBytes(), StandardCharsets.UTF_8);
 

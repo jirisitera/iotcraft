@@ -2,34 +2,30 @@ plugins {
   id "fabric-loom" version "1.10-SNAPSHOT"
   id "com.gradleup.shadow" version "9.0.0-beta8"
 }
-
 configurations {
   shade
   implementation.extendsFrom shade
 }
-
 repositories {
   maven {url("https://maven.wispforest.io/releases/")}
   maven {url("https://maven.terraformersmc.com/")}
   maven {url("https://maven.shedaniel.me/")}
 }
-
 dependencies {
   // loader
   minecraft("com.mojang:minecraft:${project.minecraft_version}")
-  mappings("net.fabricmc:yarn:${project.yarn_mappings}:v2")
+  mappings("net.fabricmc:yarn:${project.yarn_version}:v2")
   modImplementation("net.fabricmc:fabric-loader:${project.loader_version}")
   // dependencies
   modImplementation("net.fabricmc.fabric-api:fabric-api:${project.fabric_version}")
   modImplementation modApi("com.terraformersmc:modmenu:${project.modmenu_version}")
   modImplementation modApi("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}")
   // libraries
-  compileOnly("org.projectlombok:lombok:1.18.36")
-  annotationProcessor("org.projectlombok:lombok:1.18.36")
+  compileOnly("org.projectlombok:lombok:${project.lombok_version}")
+  annotationProcessor("org.projectlombok:lombok:${project.lombok_version}")
   // shadow
-  shade("com.hivemq:hivemq-mqtt-client-shaded:1.3.0")
+  shade("com.hivemq:hivemq-mqtt-client-shaded:${project.hivemq_version}")
 }
-
 processResources {
   filesMatching("fabric.mod.json") {
     expand(
@@ -42,7 +38,6 @@ processResources {
     )
   }
 }
-
 shadowJar {
   archiveVersion = ""
   archiveClassifier = ""
