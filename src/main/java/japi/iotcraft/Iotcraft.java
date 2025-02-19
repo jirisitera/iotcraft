@@ -24,7 +24,7 @@ public class Iotcraft implements ClientModInitializer {
     // register config
     AutoConfig.register(ModConfig.class, Toml4jConfigSerializer::new);
     Iotcraft.setConfig(AutoConfig.getConfigHolder(ModConfig.class).getConfig());
-    // connect to MQTT broker
+    // register mqtt client
     MqttManager.connect();
   }
 }

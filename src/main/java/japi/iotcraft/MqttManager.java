@@ -5,8 +5,6 @@ import com.hivemq.client.mqtt.datatypes.MqttQos;
 import com.hivemq.client.mqtt.mqtt3.Mqtt3AsyncClient;
 import com.hivemq.client.mqtt.mqtt3.message.connect.connack.Mqtt3ConnAck;
 import com.hivemq.client.mqtt.mqtt3.message.publish.Mqtt3Publish;
-import japi.iotcraft.component.Action;
-import japi.iotcraft.component.Trigger;
 import lombok.Getter;
 import lombok.Setter;
 import org.slf4j.Logger;
@@ -21,7 +19,10 @@ public class MqttManager {
   private static Mqtt3AsyncClient client;
 
   public static void connect() {
-    LOGGER.info("Attempting to connect to MQTT broker...");
+    if (MqttManager.getClient() != null) {
+      return;
+    }
+    LOGGER.info("Connecting to MQTT broker...");
     MqttManager.setClient(MqttClient.builder()
       .useMqttVersion3()
       .identifier(UUID.randomUUID().toString())
@@ -30,7 +31,7 @@ public class MqttManager {
       .buildAsync());
     MqttManager.getClient().connect().whenComplete((Mqtt3ConnAck connAck, Throwable throwable) -> {
       if (throwable != null) {
-        LOGGER.warn("Unable to connect to MQTT broker. Ensure the configuration is correct and broker is running.");
+        LOGGER.info("Unable to connect to MQTT broker. Ensure the configuration is correct and broker is running.");
       } else {
         LOGGER.info("Client is successfully connected to MQTT broker.");
         Trigger.listenToClientEvents();

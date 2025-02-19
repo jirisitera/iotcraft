@@ -1,12 +1,9 @@
-package japi.iotcraft.util;
+package japi.iotcraft;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
-import japi.iotcraft.Iotcraft;
-import japi.iotcraft.MqttManager;
 
 public class TriggerUpdate {
-
   private final String topic;
   private final String key;
   private String prevValue;

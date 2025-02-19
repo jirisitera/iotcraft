@@ -1,7 +1,5 @@
-package japi.iotcraft.component;
+package japi.iotcraft;
 
-import japi.iotcraft.Iotcraft;
-import japi.iotcraft.util.TriggerUpdate;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.world.ClientWorld;
@@ -56,10 +54,11 @@ public final class Trigger {
       Iotcraft.getConfig().mqtt.mainTopic + "/trigger/world/biome", "name", "type"
     );
     ClientTickEvents.START_WORLD_TICK.register((ClientWorld world) -> {
-      Iotcraft.setPlayer(MinecraftClient.getInstance().player);
-      if (Iotcraft.getPlayer() == null) {
+      if (Iotcraft.getPlayer() != null) {
         return;
       }
+      Iotcraft.setPlayer(MinecraftClient.getInstance().player);
+
       String playerUsername = Iotcraft.getPlayer().getGameProfile().getName();
       var playerUUID = Iotcraft.getPlayer().getUuidAsString();
 

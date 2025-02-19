@@ -1,11 +1,7 @@
-package japi.iotcraft.component;
+package japi.iotcraft;
 
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.google.gson.JsonPrimitive;
 import com.hivemq.client.mqtt.mqtt3.message.publish.Mqtt3Publish;
-import japi.iotcraft.Iotcraft;
-import japi.iotcraft.MqttManager;
 import net.minecraft.client.MinecraftClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,13 +12,6 @@ public final class Action {
   private static final Logger LOGGER = LoggerFactory.getLogger(Iotcraft.MOD_ID);
 
   private Action() {
-  }
-
-  private static void sendErrorMessage(String topic, String errorMessage) {
-    var errorObj = new JsonObject();
-    errorObj.add("topic", new JsonPrimitive(topic));
-    errorObj.add("error", new JsonPrimitive(errorMessage));
-    MqttManager.publishMessage(Iotcraft.getConfig().mqtt.mainTopic + "/error" + topic, Iotcraft.GSON.toJson(errorObj));
   }
 
   public static void subscribeToChat() {
@@ -47,7 +36,6 @@ public final class Action {
       } else {
         var errorMessage = "Keys 'message' and 'isCommand' required";
         Action.LOGGER.warn(errorMessage);
-        sendErrorMessage("/action/chat", errorMessage);
       }
     });
   }
@@ -66,7 +54,6 @@ public final class Action {
       } else {
         var errorMessage = "Keys 'fov' required";
         Action.LOGGER.warn(errorMessage);
-        sendErrorMessage("/action/option/fov", errorMessage);
       }
     });
     MqttManager.subscribeTopic(Iotcraft.getConfig().mqtt.mainTopic + "/action/option/brightness", (Mqtt3Publish publish) -> {
@@ -82,7 +69,6 @@ public final class Action {
       } else {
         var errorMessage = "Keys 'brightness' required";
         Action.LOGGER.warn(errorMessage);
-        sendErrorMessage("/action/option/fov", errorMessage);
       }
     });
   }
